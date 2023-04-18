@@ -9,26 +9,42 @@ var xhr = new XMLHttpRequest();
  
 function Insert()
 {
-    xhr.open("POST", "https://reqres.in/api/users", true);
-    xhr.getResponseHeader('Content-Type', 'application/json');
+    xhr.open("POST", "http://localhost:3000/posts", false);
+    xhr.setRequestHeader("Content-type", "application/json");
     params = {
-        "name": "Anamika Sawhney",
-        "job": "Consultant"
+        "title": "post1",
+        "author": "Consultant"
 };
 
+ 
     xhr.onload = function  ()
 {
-    alert("a");
-    console.log(xhr.responseText);
+     console.log(xhr.responseText);
     document.getElementById("div1").innerHTML = xhr.responseText;
 }
+console.log(params);
      // Send the Request
-    xhr.send(params);
+     xhr.send(JSON.stringify(params));     
 
 }
  function Get()
  {
 xhr.open("get", "http://localhost:3000/posts")
+
+xhr.send(null);
+
+ xhr.onload = function  ()
+{
+    alert("a");
+    console.log(xhr.responseText);
+    document.getElementById("div1").innerHTML = xhr.responseText;
+}
+ }
+
+// Delete();
+ function Delete()
+ {
+xhr.open("delete", "http://localhost:3000/posts/2")
 
 xhr.send(null);
 
