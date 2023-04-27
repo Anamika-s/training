@@ -19,3 +19,5 @@ console.log("A")
  Get().then(res=> console.log(res));
 
  console.log("B")
+
+ 

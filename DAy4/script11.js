@@ -17,7 +17,7 @@
 
 async function GetRecords()
 {
-    console.log("Inside")
+ console.log("Inside")
  var response=  await fetch("https://jsonplaceholder.typicode.com/posts/1");
  var data = await response.json();
     return data;

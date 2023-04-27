@@ -1,0 +1,41 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <form>
+ENter Username <input type="text" id="txtUserName">
+<button type="button" onclick="StoreData()"> Store Data </button>
+<button type="button" onclick="GetData()"> Get Data </button>
+<button type="button" onclick="logout()"> LogOut</button>
+
+        </form>
+        <script>
+            StoreData=  ()=>
+            {
+                sessionStorage.setItem("user", document.getElementById("txtUserName").value)
+                sessionStorage.setItem("name", "aaaa")
+            }
+            GetData = ()=>
+            {
+               console.log(localStorage.getItem("user"))
+            
+            }
+            logout = ()=>
+            localStorage.removeItem("name")
+             
+
+
+</script>
+
+<script src="function.js"></script>
+
+
+
+        </script>
+    </body>
+    </html>
