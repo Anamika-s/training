@@ -1,0 +1,163 @@
+
+
+ --stored procedures
+
+ select * from employee;
+
+ select * from employee where id = 5;
+
+ select * from employee;
+ go
+
+
+
+ -- Create a proc
+ create proc GetEmployees
+ As
+ Begin  --{
+ select * from employee
+ End -- }
+
+ -- Call proc
+ exec GetEmployees
+
+
+ create proc InsertEmpoloyee
+ As
+ Begin
+ insert into Employee (id, name, address, salary, dept, doj)
+ values (9,'Kiren','Bombay',23000, 'Accts', GETDATE())
+ End
+
+ exec InsertEmpoloyee
+
+ -- update
+ create proc EditEmployee
+ As
+ Begin
+ update Employee set address = 'Calcutta' where id=2
+ End
+
+ exec EditEmployee
+
+ -- delete
+ create proc DeleteEmployee
+ As
+ Begin
+ delete Employee 
+ where id=2
+ End
+
+ exec DeleteEmployee
+  
+
+   
+
+-- Procedures with parameters
+-- input parameters
+
+-- procedures that returns a value
+-- using return only 1 value that too integer can be sent
+-- insert 
+alter proc InsertEmp (@id int,
+@name varchar(20), @address varchar(50),
+@salary int, @dept varchar(20), @doj datetime)
+As
+BEgin
+ if(exists(Select * from EMployee where id=@id)
+ and exists(Select * from EMployee where address=@address))
+  
+	return 0
+ else 
+	begin
+		insert into Employee (id, name, address, salary, dept, doj)
+		values (@id, @name, @address,@salary,  @dept, @doj)
+		return 1
+	end
+ End
+
+ --  exec
+ declare @flag int
+ exec @flag = InsertEmp 11, 'Om', 'AP',24000, 'HR','12/12/2022'
+  if(@flag =0 )
+	print 'REcord already exists'
+else 
+print 'Record inserted'
+ -- update
+ create proc EditEmp(@id int, @address varchar(20))
+ As
+ Begin
+ update Employee set address = @address where id=@id
+ End
+
+ exec EditEmployee
+
+ -- delete
+ create proc DeleteEmp (@id int)
+ As
+ Begin
+ delete Employee 
+ where id=@id
+ End
+
+ exec DeleteEmp 9
+  
+
+ 
+
+----------------------
+
+-- procedure can return morw than 1 value using
+-- output parameters
+
+alter proc SearchEmployeeById(@id int,
+ @name varchar(20) out, 
+  @dept varchar(50) out,
+  @salary int out)
+As
+ Begin 
+  if(exists (select * from Employee where id=@id)) 
+   begin
+  Select @name = name, @dept= dept, @salary = salary
+  from Employee where id=@id
+  return 0
+  end
+  else
+   return 1
+ End
+
+ -- calling 
+ declare @name varchar(20)
+ declare @dept varchar(20)
+ declare @salary int
+ declare @flag int
+ exec  @flag = SearchEmployeeById 10 , @name out, @dept out, @salary out
+  if (@flag=0)
+ print @name + ' ' + @dept  + ' ' + Convert(varchar, @salary) 
+ else 
+ print 'Record wiuth this ID do not exist'
+
+----------------
+
+functions
+-- functions 
+create function CombineName()
+returns varchar(40)
+ begin
+    return 'AAAAAAA' + 'BBBBBBBBBB'
+  end
+
+  select dbo.CombineName()
+
+  alter function CombineName(@name1 varchar(20), @name2 varchar(20))
+returns varchar(40)
+ begin
+    return concat(@name1 , ' ' , @name2)
+  end
+
+
+  select dbo.CombineName('lalit','sood')
+
+  select dbo.CombineNAme(name, dept) from Employee
+
+
