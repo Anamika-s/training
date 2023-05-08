@@ -10,6 +10,11 @@ Create a table employee with the fllowing strducture
  Manager name
 
 	Here, which column u , will make primary key shud be auto generated
+create table Stu (rn int primary key identity(100,5) , name char(20))
+
+insert into Stu(name) values('Aman')
+
+select * from stu
   
 	name has to have a value
 
@@ -21,23 +26,10 @@ Create a table employee with the fllowing strducture
 
 What do we call them??
 
- Address
-
-address
-city
-state
-piincode
-
-
- dept
- dept id
- name
- manager
-
-1. Make a procedure to insert records inn the employee 	table 
+ 1. Make a procedure to insert records in the employee 	table 
 2. Make a procedure to update , delete records based on employee id
-
-User shud get a mesaage whether record is deleted or updated or not
+if any value is not valid, shud get appropriate message
+User shud get a message whether record is deleted or updated or not
  
 Once, the table is populated , perform following operations:
 
